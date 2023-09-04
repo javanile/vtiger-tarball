@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 rm -fr blank
-git clone --single-branch --branch blank https://github.com/javanile/vtiger-core.git blank && true
+git clone --single-branch --branch blank https://github.com/javanile/vtiger-tarball.git blank && true
 
 cd blank
 
