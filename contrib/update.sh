@@ -56,7 +56,7 @@ build_tag () {
   git checkout -B "v${version}" "${blank_hash}"
   tar -xzf ../${package_archive}
   git add .
-  git commit -am "Vtiger ${version} [before install]"
+  git commit -am "Vtiger ${version} - Source code"
 
   echo "-> Updating..."
   cp ../contrib/vtiger.json.tpl ./vtiger.json
@@ -66,10 +66,10 @@ build_tag () {
   docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh --install-mysql --assert-mysql --wizard --dump
   docker compose up -d
   cd build
-  echo "TEST CRM SOURCE"
-  exit 0
+  git add vtiger.sql
+  git commit -am "Vtiger ${version} - Database dump"
   git add .
-  git commit -am "Vtiger ${version} [after install]"
+  git commit -am "Vtiger ${version} - Installation files"
 
   echo "-> Pushing..."
   git pull --no-rebase --no-edit -X ours origin "v${version}" && true
