@@ -20,3 +20,6 @@ git rm -rf .
 git add -A
 git commit --allow-empty -m "Initial commit"
 git push --set-upstream origin tmp
+
+## Clean up
+rm -fr blank

@@ -64,10 +64,9 @@ build_tag () {
   cd ..
   docker compose build vtiger
   docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh --install-mysql --assert-mysql --wizard --dump
-  docker compose up -d
   cd build
   git add vtiger.sql
-  git commit -am "Vtiger ${version} - Database dump"
+  git commit -m "Vtiger ${version} - Database dump"
   git add .
   git commit -am "Vtiger ${version} - Installation files"
 
@@ -83,8 +82,8 @@ build_tag () {
   git checkout -b tmp
   git pull --no-rebase --allow-unrelated-histories --no-edit -X ours origin tmp && true
   git merge --no-edit -X theirs "v${version}" && true
-  git push origin --delete "v${version}"
-  git push origin tmp
+  git push origin --delete "v${version}" && true
+  git push origin tmp && true
   cd ..
 }
 
