@@ -61,6 +61,10 @@ build_tag () {
   echo "-> Updating..."
   cp ../contrib/vtiger.json.tpl ./vtiger.json
   sed -e 's!%VERSION%!'"${version}"'!g' -ri vtiger.json
+
+
+  echo "TEST CRM SOURCE"
+  exit 0
   git add .
   git commit -am "Vtiger ${version} [after install]"
 
