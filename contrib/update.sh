@@ -48,7 +48,6 @@ build_tag () {
     cd vtigercrm || cd vtigerCRM
     tar -czf ../../../${package_archive} .
     cd ../../..
-    exit
   fi
   cd build
   local blank_hash=$(git rev-parse blank)
