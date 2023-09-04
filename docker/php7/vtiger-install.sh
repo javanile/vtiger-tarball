@@ -126,6 +126,15 @@ fi
 
 ## Uninstall MySQL
 if [[ $@ == *'--clean-up'* ]]; then
-    find /var/www/html/cache/ -name "*.xml" -type f -delete
-    find /var/www/html/cache/ -name "*.zip" -type f -delete
+  rm -f /var/www/html/config.inc.php && true
+  rm -f /var/www/html/config.csrf-secret.php && true
+  rm -f /var/www/html/vtiger-health.php && true
+  rm -fr /var/www/html/test/templates_c && true
+  find /var/www/html/cache/ -name "*.xml" -type f -delete && true
+  find /var/www/html/cache/ -name "*.zip" -type f -delete && true
+  find /var/www/html/test/ -name "*.xml" -type f -delete && true
+  rm -fr /var/www/html/test/vtlib/HTML/ && true
+  mkdir -p /var/www/html/test/vtlib/HTML/ && true
+  echo "Cache folder for htmlpurifier library" > /var/www/html/test/vtlib/HTML/README.txt
+  touch /var/www/html/config.inc.php
 fi
