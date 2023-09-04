@@ -45,6 +45,7 @@ RUN apt-get clean && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 #VOLUME ["/var/lib/vtiger"]
 
+COPY vtiger-info.php /usr/src/vtiger/
 COPY vtiger-install.php /usr/src/vtiger/
 COPY vtiger-health.php /usr/src/vtiger/
 

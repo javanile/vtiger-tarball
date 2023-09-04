@@ -11,11 +11,9 @@ workdir=$(echo $PWD)
 index=/var/www/html/index.php
 
 fail() { echo "[vtiger] Fail at $1 on line $2: $3"; }
-info() { if [[ -f "${index}.0" ]]; then sed -e 's!%%MESSAGE%%!'"$1"'!' "${index}.boot" > "${index}"; fi; }
+info() { if [[ -f "${index}.0" ]]; then sed -e 's!%%MESSAGE%%!'"$1"'!' "/usr/src/vtiger/vtiger-info.php" > "${index}"; fi; }
 
 trap 'fail "${BASH_SOURCE}" "${LINENO}" "${BASH_COMMAND}"' 0
-
-docker-vtiger-hook.sh init
 
 touch .vtiger.lock
 
@@ -43,13 +41,6 @@ cd /usr/src/vtiger
 info "Database preparation..."
 echo "[vtiger] Waiting for database server..."
 echo -n "[vtiger] " && mysql-import --do-while vtiger.sql
-[[ -f vtiger.sql.lock ]] && docker-vtiger-hook.sh database-import-done
-
-## fill current mounted volume
-info "Waiting for volume preparation..."
-echo "[vtiger] Waiting for preparation volume: /var/lib/vtiger"
-symvol copy /usr/src/vtiger/volume /var/lib/vtiger && symvol mode /var/lib/vtiger www-data:www-data
-symvol link /var/lib/vtiger /var/www/html && symvol mode /var/www/html www-data:www-data
 
 ## update permissions
 echo "[vtiger] Start cron daemon..."
@@ -70,5 +61,4 @@ cd "${workdir}"
 echo "[vtiger] Run foreground process..."
 [[ -f .vtiger.lock ]] && rm .vtiger.lock
 [[ ! -f vtiger.json ]] && cp /usr/src/vtiger/vtiger.json .
-docker-vtiger-hook.sh before-apache-start
 apache2-foreground
