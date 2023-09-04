@@ -60,7 +60,7 @@ build_tag () {
 
   echo "-> Updating..."
   cp ../contrib/vtiger.json.tpl ./vtiger.json
-  sed -e 's!%VERSION%!'"${version}"'!g' -ri composer.json
+  sed -e 's!%VERSION%!'"${version}"'!g' -ri vtiger.json
   git add .
   git commit -am "Vtiger ${version} [after install]"
 
