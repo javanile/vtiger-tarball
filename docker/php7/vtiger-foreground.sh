@@ -50,7 +50,7 @@ cron
 
 ## Dispose courtesy screen
 service apache2 stop >/dev/null 2>&1
-pgrep apache2 | xargs kill -9 >/dev/null 2>&1
+pgrep apache2 | xargs kill -9 >/dev/null 2>&1 || true
 [[ -f "${index}.0" ]] && mv -f "${index}.0" "${index}"
 
 ## Return to working directory
@@ -60,5 +60,4 @@ cd "${workdir}"
 ## Run main foreground process
 echo "[vtiger] Run foreground process..."
 [[ -f .vtiger.lock ]] && rm .vtiger.lock
-[[ ! -f vtiger.json ]] && cp /usr/src/vtiger/vtiger.json .
 apache2-foreground

@@ -85,12 +85,13 @@ fi
 ## Execute Wizard
 if [[ $@ == *'--wizard'* ]]; then
   mkdir -p /var/lib/vtiger/logs
+  touch /var/www/html/config.inc.php
   service apache2 start
   response=$(curl -Is "http://localhost/index.php?module=Install&view=Index" | head -n 1 | tr -d "\r\n")
   if [[ "${response}" != "HTTP/1.1 200 OK" ]]; then exit 64; fi
   cp /usr/src/vtiger/vtiger-health.php /var/www/html/vtiger-health.php
   php /usr/src/vtiger/vtiger-install.php
-  rm -f /var/www/html/config.inc.php
+  #rm -f /var/www/html/config.inc.php
   if [[ $? -ne 0 ]]; then exit 66; fi
 fi
 

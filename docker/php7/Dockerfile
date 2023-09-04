@@ -7,7 +7,6 @@ ENV VT_VERSION="7.1.0-php7.4" \
     COMPOSER_HOME=/usr/src/vtiger \
     PATH="/usr/src/vtiger/vendor/bin:$PATH"
 
-#COPY php.ini /usr/local/etc/php/
 #COPY vtiger.json .symvol /usr/src/vtiger/
 #COPY vtiger-ssl.* /etc/apache2/ssl/
 #COPY 000-default.conf /etc/apache2/sites-available/
@@ -26,6 +25,8 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
     a2enmod ssl && a2enmod rewrite && ${LAYER_BREAK}
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
+
+COPY php.ini /usr/local/etc/php/
 
 #COPY develop-install.sh /usr/local/bin/
 #RUN develop-install.sh

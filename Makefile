@@ -23,6 +23,6 @@ test-update:
 
 test-docker:
 	@docker compose build vtiger
-	@docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh --install-mysql
+	@docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh --install-mysql --assert-mysql --wizard
 	@docker compose up -d
 	@docker compose logs -f vtiger
