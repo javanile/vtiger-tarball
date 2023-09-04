@@ -63,7 +63,7 @@ build_tag () {
   sed -e 's!%VERSION%!'"${version}"'!g' -ri vtiger.json
   cd ..
   docker compose build vtiger
-  docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh
+  docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh --install-mysql --assert-mysql --wizard --dump
   docker compose up -d
   cd build
   echo "TEST CRM SOURCE"

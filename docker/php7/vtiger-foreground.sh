@@ -40,7 +40,7 @@ printenv | sed 's/^\(.*\)$/export \1/g' | grep -E '^export MYSQL_|^export VT_' >
 cd /usr/src/vtiger
 info "Database preparation..."
 echo "[vtiger] Waiting for database server..."
-echo -n "[vtiger] " && mysql-import --do-while vtiger.sql
+echo -n "[vtiger] " && mysql-import --do-while /var/www/html/vtiger.sql
 
 ## update permissions
 echo "[vtiger] Start cron daemon..."
