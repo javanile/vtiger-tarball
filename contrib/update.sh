@@ -56,13 +56,13 @@ build_tag () {
   git checkout -B "v${version}" "${blank_hash}"
   tar -xzf ../${package_archive}
   git add .
-  git commit -am "Vtiger ${version}"
+  git commit -am "Vtiger ${version} [before install]"
 
   echo "-> Updating..."
-  cp ../contrib/composer.json.tpl ./composer.json
+  cp ../contrib/vtiger.json.tpl ./vtiger.json
   sed -e 's!%VERSION%!'"${version}"'!g' -ri composer.json
   git add .
-  git commit -am "Package ${version}"
+  git commit -am "Vtiger ${version} [after install]"
 
   echo "-> Pushing..."
   git pull --no-rebase --no-edit -X ours origin "v${version}" && true
