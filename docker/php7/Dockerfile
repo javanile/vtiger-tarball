@@ -45,6 +45,15 @@ RUN apt-get clean && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 #VOLUME ["/var/lib/vtiger"]
 
+COPY vtiger-install.php /usr/src/vtiger/
+COPY vtiger-health.php /usr/src/vtiger/
+
+COPY vtiger-foreground.sh /usr/local/bin/
+COPY vtiger-install.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/vtiger-foreground.sh && \
+	chmod +x /usr/local/bin/vtiger-install.sh
+
 WORKDIR /app
 
 CMD ["vtiger-foreground.sh"]

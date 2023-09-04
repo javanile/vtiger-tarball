@@ -3,3 +3,7 @@ version: "3.7"
 services:
   vtiger:
     build: ./docker/php7
+    ports:
+      - 8080:80
+    volumes:
+      - ./build:/var/www/html
