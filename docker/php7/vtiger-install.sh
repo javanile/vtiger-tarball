@@ -123,3 +123,9 @@ if [[ $@ == *'--remove-mysql'* ]]; then
         /var/lib/mysql /var/log/mysql* /var/log/upstart/mysql.log* /var/run/mysqld \
         /tmp/* /var/tmp/* /var/lib/apt/lists/*
 fi
+
+## Uninstall MySQL
+if [[ $@ == *'--clean-up'* ]]; then
+    find /var/www/html/cache/ -name "*.xml" -type f -delete
+    find /var/www/html/cache/ -name "*.zip" -type f -delete
+fi

@@ -63,7 +63,7 @@ build_tag () {
   sed -e 's!%VERSION%!'"${version}"'!g' -ri vtiger.json
   cd ..
   docker compose build vtiger
-  docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh --install-mysql --assert-mysql --wizard --dump
+  docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh --install-mysql --assert-mysql --wizard --dump --clean-up
   cd build
   git add vtiger.sql
   git commit -m "Vtiger ${version} - Database dump"
