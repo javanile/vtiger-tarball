@@ -61,8 +61,11 @@ build_tag () {
   echo "-> Updating..."
   cp ../contrib/vtiger.json.tpl ./vtiger.json
   sed -e 's!%VERSION%!'"${version}"'!g' -ri vtiger.json
-
-
+  cd ..
+  docker compose build vtiger
+  docker compose run --rm vtiger bash /usr/local/bin/vtiger-install.sh
+  docker compose up -d
+  cd build
   echo "TEST CRM SOURCE"
   exit 0
   git add .
